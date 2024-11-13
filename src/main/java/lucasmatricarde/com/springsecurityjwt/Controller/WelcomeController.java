@@ -12,13 +12,11 @@ public class WelcomeController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('MANAGER')")
     public String admin() {
         return "Welcome to Spring Security JWT Admin";
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
     public String user() {
         return "Welcome to Spring Security JWT User";
     }

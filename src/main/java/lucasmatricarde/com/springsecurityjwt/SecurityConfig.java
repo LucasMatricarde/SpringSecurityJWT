@@ -21,7 +21,10 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login").permitAll() // Permite acesso à página de login
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/admin/**").hasRole("MANAGER")
+                        .requestMatchers("/user/**").hasAnyRole("USER", "MANAGER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults()) // Usa form login ao invés de basic auth
